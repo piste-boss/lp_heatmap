@@ -77,67 +77,200 @@
 
 ---
 
-## 修正2: セカンダリCTA（資料ダウンロード）の追加【高】
+## 修正2: セカンダリCTA — 「無料で試してみる」サンプル体験への誘導【高】
 
 ### 背景
-プラン改善案C-2「コンバージョンポイントの多段階化」が未実施。LINE登録のみではハードルが高いユーザーを取りこぼしている。
+- プラン改善案C-2「コンバージョンポイントの多段階化」が未実施
+- LINE登録のみではハードルが高いユーザーを取りこぼしている
+- **Web上で即サンプル体験ができるページが既に存在する** → これを最大限活用する
+- 資料請求よりサンプル体験の方が成約率が高い（体験者は購買意欲が段違い）
+
+### CTA戦略: 2段構え
+
+```
+プライマリCTA:  「無料でサンプルを試す」（サンプル体験ページへ）
+セカンダリCTA:  「LINEで無料相談する」（LINE友だち追加）
+```
+
+> **変更ポイント**: LINE CTAをセカンダリに格下げし、サンプル体験をプライマリに昇格。
+> 理由: 「試す」は匿名で即行動できるが、LINE登録は個人情報提供のハードルがある。
+> Google広告からの流入ユーザーは「解決策を今すぐ知りたい」ので、体験が最も刺さる。
 
 ### 対象
-`index.html` — 料金セクションのCTA（L206-216付近）、最終CTAセクション（L268-278付近）
+`index.html` — ヒーロー、料金セクション、最終CTAの3箇所
 
 ### 修正内容
-既存のLINE CTAの下にセカンダリCTAを追加する。
 
-#### 料金セクション（L216 `.cta-sub` の直後に追加）
+#### ヒーローセクションのCTA（L85-95付近）を書き換え
 ```html
-<a href="#contact" class="cta-secondary">
-  まずは3分で読める資料を見る
+<div class="cta-wrap">
+  <!-- プライマリ: サンプル体験 -->
+  <a href="https://kuchikomi-gpt.netlify.app/sample1/" target="_blank" rel="noopener" class="cta-primary">
+    <span class="cta-primary__label">無料でサンプルを試す</span>
+    <span class="cta-primary__sub">登録不要・30秒で体験</span>
+  </a>
+  <!-- セカンダリ: LINE相談 -->
+  <a href="https://lin.ee/pmnqCCA" target="_blank" rel="noopener" class="cta-secondary">
+    <svg class="icon-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+      <path d="M24 5C13.5 5 5 12.4 5 21.5c0 5 2.7 9.6 7 12.6.3.2.7.6.5 1.7-.2 1.3-.9 4.6-1 5.6-.1.7.3 1.4 1 1.3.6-.1 5.9-3.6 8.3-5 .5-.3 1.1-.4 1.7-.4 1.4 0 2.8.1 4.2.1 11.7 0 21.1-8 21.1-17.9C46.8 12.6 36.6 5 24 5z" fill="currentColor"/>
+    </svg>
+    LINEで相談する
+  </a>
+</div>
+```
+
+#### 料金セクション（L216付近 `.cta-sub` の直後）
+```html
+<a href="https://kuchikomi-gpt.netlify.app/sample1/" target="_blank" rel="noopener" class="cta-try">
+  まずは無料でサンプルを試す →
 </a>
 ```
 
-#### 最終CTAセクション（L277 `.cta-sub` の直後に追加）
+#### 最終CTAセクション（L268-278付近）を書き換え
 ```html
-<div class="cta-secondary-wrap">
-  <span class="cta-or">または</span>
-  <a href="mailto:info@piste-i.com?subject=クチコミGPT資料請求" class="cta-secondary">
-    メールで資料を受け取る（無料）
+<div class="cta-wrap">
+  <a href="https://kuchikomi-gpt.netlify.app/sample1/" target="_blank" rel="noopener" class="cta-primary cta-primary--lg">
+    <span class="cta-primary__label">無料でサンプルを試す</span>
+    <span class="cta-primary__sub">登録不要・30秒であなたの店舗の口コミサンプルを生成</span>
+  </a>
+  <div class="cta-or-wrap">
+    <span class="cta-or">または</span>
+    <a href="https://lin.ee/pmnqCCA" target="_blank" rel="noopener" class="cta-secondary">
+      <svg class="icon-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+        <path d="M24 5C13.5 5 5 12.4 5 21.5c0 5 2.7 9.6 7 12.6.3.2.7.6.5 1.7-.2 1.3-.9 4.6-1 5.6-.1.7.3 1.4 1 1.3.6-.1 5.9-3.6 8.3-5 .5-.3 1.1-.4 1.7-.4 1.4 0 2.8.1 4.2.1 11.7 0 21.1-8 21.1-17.9C46.8 12.6 36.6 5 24 5z" fill="currentColor"/>
+      </svg>
+      LINEで直接相談する
+    </a>
+  </div>
+</div>
+```
+
+#### フローティングCTA（L313-322付近）も変更
+```html
+<div class="floating-fab">
+  <a href="https://kuchikomi-gpt.netlify.app/sample1/" target="_blank" rel="noopener" class="cta-primary">
+    <span>無料でサンプルを試す</span>
   </a>
 </div>
 ```
 
 ### CSS追加（styles.css）
 ```css
-/* --- Secondary CTA --- */
+/* --- Primary CTA: サンプル体験ボタン --- */
+.cta-primary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-md);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.cta-primary:hover {
+  background: var(--primary-light);
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-primary--lg {
+  max-width: 480px;
+  padding: 20px 40px;
+}
+
+.cta-primary__label {
+  font-size: 1.15rem;
+}
+
+.cta-primary__sub {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin-top: 4px;
+}
+
+/* --- Secondary CTA: LINE相談ボタン --- */
 .cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 10px 24px;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.cta-secondary:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.cta-secondary .icon-line {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Try CTA: テキストリンク型 --- */
+.cta-try {
   display: inline-block;
   margin-top: 12px;
   color: var(--primary);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color 0.2s;
 }
 
-.cta-secondary:hover {
+.cta-try:hover {
   color: var(--primary-light);
 }
 
-.cta-secondary-wrap {
+/* --- Or Divider --- */
+.cta-or-wrap {
   margin-top: 16px;
+  text-align: center;
 }
 
 .cta-or {
   display: block;
   color: var(--muted);
   font-size: 0.8rem;
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 ```
 
+### コンバージョン計測（Google広告用）
+サンプル体験ページへのクリックも計測する:
+
+```html
+<a href="https://kuchikomi-gpt.netlify.app/sample1/"
+   onclick="gtag('event', 'conversion', {'send_to': 'AW-XXXXXXXXXX/ZZZZZZ'});">
+```
+
+Google広告側に新しいコンバージョンアクションを追加:
+
+| 設定項目 | 値 |
+|---------|-----|
+| コンバージョン名 | `サンプル体験クリック` |
+| 値 | `800円`（LINE追加より軽いがリード温度は高い） |
+| カウント方法 | 初回のみ |
+
 ### 備考
-- 現段階では資料DL用のLP/フォームがないため、メール誘導またはページ内アンカーで代替
-- 後日 Google フォーム or 専用資料DLページを用意した際にリンク先を差し替える
+- `https://kuchikomi-gpt.netlify.app/sample1/` は実際のURLに置き換えること
+- サンプル体験ページ側でも「結果表示後にLINE誘導」を入れると、体験→LINE登録の2段階CVが狙える
+- フローティングCTAもサンプル体験に変更することで、スクロール中どこからでも体験に誘導できる
 
 ---
 
