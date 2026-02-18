@@ -167,11 +167,11 @@ utm_source=google&utm_medium=cpc&utm_campaign={campaignid}&utm_term={keyword}&ut
 
 **キーワード（フレーズ一致）**:
 ```
-"口コミ 増やす方法"
+"対策"
+"Googleマップ 口コミ 口コミ 増やす方法"
 "口コミ 増やす"
 "口コミ 対策"
 "口コミ 集める方法"
-"Googleマップ 口コミ 対策"
 "Googleマップ 口コミ 増やす"
 "Google口コミ 増やし方"
 "口コミ 少ない 対策"
