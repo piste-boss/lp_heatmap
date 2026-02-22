@@ -191,6 +191,7 @@ description: Clarityのヒートマップデータを解析してコンバージ
 - **デバイス別分析**: モバイルとデスクトップで行動が異なる場合がある
 - **流入元の確認**: 広告経由とオーガニック流入でパターンが違う
 - **期間の選定**: 直近3-7日間のデータが推奨
+- **【Piste系LP】広告データとの期間一致**: Clarityの分析期間と広告レポートの期間を一致させる。ずれがある場合はレポートに明記する
 
 ### レポート作成時の注意点
 - **データに基づく**: 推測ではなく実際のヒートマップデータを根拠にする
@@ -204,6 +205,8 @@ description: Clarityのヒートマップデータを解析してコンバージ
 
 ## 使用例
 
+### 例1: Piste系LP（広告データ統合あり）
+
 ```
 ユーザー: Clarityでpiste_lp_over40の解析をお願い
 
@@ -211,12 +214,31 @@ description: Clarityのヒートマップデータを解析してコンバージ
 1. Clarityにログイン
 2. piste_lp_over40プロジェクトを選択
 3. ヒートマップとセッション録画を収集
+4. /Users/ishikawasuguru/insta_piste/add_repo から分析対象期間と
+   同一期間のInstagram広告レポートを読み取り
+5. LPの構造を確認
+6. Clarityデータ＋広告データの統合分析で問題点を特定
+7. 広告パフォーマンスも踏まえた修正案を立案
+8. 統合レポートを作成し、以下に保存：
+   - /Users/ishikawasuguru/.gemini/antigravity/brain/<conversation-id>/20260210piste_lp_over40.md
+   - /Users/ishikawasuguru/lp_heatmap/20260210piste_lp_over40.md
+```
+
+### 例2: Piste系以外のLP（従来通り）
+
+```
+ユーザー: Clarityで〇〇LPの解析をお願い
+
+アシスタント:
+1. Clarityにログイン
+2. 対象プロジェクトを選択
+3. ヒートマップとセッション録画を収集
 4. LPの構造を確認
 5. 問題点を特定
 6. 修正案を立案
 7. レポートを作成し、以下に保存：
-   - /Users/ishikawasuguru/.gemini/antigravity/brain/<conversation-id>/20260210piste_lp_over40.md
-   - /Users/ishikawasuguru/lp_heatmap/20260210piste_lp_over40.md
+   - /Users/ishikawasuguru/.gemini/antigravity/brain/<conversation-id>/YYYYMMDD_lp_name.md
+   - /Users/ishikawasuguru/lp_heatmap/YYYYMMDD_lp_name.md
 ```
 
 ## トラブルシューティング
@@ -234,10 +256,18 @@ description: Clarityのヒートマップデータを解析してコンバージ
 - Quick Winsに絞って簡潔にまとめる
 - 優先度の低い修正案は別ドキュメントに分離
 
+## 広告データ参照先
+
+### Piste系LP専用
+- **ディレクトリ**: `/Users/ishikawasuguru/insta_piste/add_repo`
+- **ファイル命名規則**: `YYYYMMDD_piste_ads_analysis.md`
+- **データ内容**: Instagram/Meta広告のパフォーマンスデータ（CPC、CTR、消化金額、セグメント別比較、クリエイティブ別詳細）
+
 ## 関連スキル
 
 - なし（このスキルは独立して使用可能）
 
 ## 更新履歴
 
+- 2026-02-22: Piste系LP（piste_lp, piste_over40）でInstagram広告データの統合分析機能を追加
 - 2026-02-10: 初版作成
