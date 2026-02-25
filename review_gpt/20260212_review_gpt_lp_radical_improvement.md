@@ -1,4 +1,4 @@
-しゅう# クチコミGPT LP 抜本的改善レポート
+/Users/ishikawasuguru/lp_heatmap/review_gpt/20260225review_gpt.mdしゅう# クチコミGPT LP 抜本的改善レポート
 
 **作成日**: 2026年2月12日
 **前回レポート**: 20260210review_gpt_lp.md
